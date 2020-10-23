@@ -1,14 +1,21 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier",
+    "import",
+    "eslint-plugin-import-helpers",
+    "jsx-a11y"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
-    // Uncomment the following lines to enable eslint-config-prettier
-    // Is not enabled right now to avoid issues with the Next.js repo
-    // "prettier",
-    // "prettier/@typescript-eslint"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react"
   ],
   "env": {
     "es6": true,
@@ -17,6 +24,7 @@
     "node": true
   },
   "rules": {
+    "prettier/prettier": "error",
     "react/react-in-jsx-scope": 0,
     "react/display-name": 0,
     "react/prop-types": 0,
@@ -38,6 +46,37 @@
       {
         "allow": ["warn", "error"]
       }
+    ],
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "/^react/",
+          "/^next/",
+          "module",
+          "/^@/controllers/",
+          "/^@/middlewares/",
+          "/^@/components/",
+          "/^@/",
+          "/^~/",
+          ["parent", "sibling", "index"]
+        ],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
     ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
   }
 }
